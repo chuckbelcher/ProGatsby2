@@ -8,8 +8,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
+import Helmet from 'react-helmet';
 
 import Header from "./header"
+import Archive from "./archive"
 import "./layout.css"
 
 const Layout = ({ children }) => (
@@ -19,12 +21,22 @@ const Layout = ({ children }) => (
         site {
           siteMetadata {
             title
+            description
           }
         }
       }
     `}
     render={data => (
       <>
+        <Helmet 
+          title={data.site.siteMetadata.title}
+          meta={[
+            { name: 'description', content: data.site.siteMetadata.description },
+            { name: 'keywords', content: 'sample, something' }
+          ]}
+        >
+        <html lang="en" />
+        </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div
           style={{
@@ -35,6 +47,7 @@ const Layout = ({ children }) => (
           }}
         >
           <main>{children}</main>
+          <Archive />
           <footer>
             © {new Date().getFullYear()}, Built with
             {` `}

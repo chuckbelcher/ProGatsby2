@@ -10,6 +10,7 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 import { StaticQuery, graphql } from "gatsby"
 import Helmet from 'react-helmet';
+import Img from 'gatsby-image'
 
 import Header from "./header"
 import Archive from "./archive"
@@ -21,6 +22,21 @@ const MainLayout = styled.main`
   margin-left: 50px;
   display: grid;
   grid-template-columns: 4fr  1fr;
+  grid-gap: 40px;
+`
+
+const MainImage = styled.main`
+  margin: 10px;
+`
+
+const MainFooter = styled.main`
+  height: 30px;
+  background: #524763;
+  color: white;
+  a {
+    text-decoration: underline;
+    color: white;
+  }
 `
 
 const Layout = ({ children }) => (
@@ -31,6 +47,13 @@ const Layout = ({ children }) => (
           siteMetadata {
             title
             description
+          }
+        }
+        file(relativePath: { regex: "/bg/" }) {
+          childImageSharp {
+            fluid(maxWidth: 800) {
+              ...GatsbyImageSharpFluid_tracedSVG
+            }
           }
         }
       }
@@ -50,17 +73,20 @@ const Layout = ({ children }) => (
           <html lang="en" />
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
+        <MainImage>
+          <Img fluid={data.file.childImageSharp.fluid} />
+        </MainImage>
         <MainLayout>
-          <div>
-            {children}
-          </div>
+          <div>{children}</div>
           <Archive />
         </MainLayout>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        <MainFooter>
+          <footer>
+            © {new Date().getFullYear()}, Built by
+            {` `}
+            <a href="https://www.pateogroup.com">Pateo Group</a>
+          </footer>
+        </MainFooter>
       </>
     )}
   />

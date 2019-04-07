@@ -19,7 +19,7 @@ import "./layout.css"
 const MainLayout = styled.main`
   max-width: 90%;
   margin: 0px;
-  margin-left: 50px;
+  margin-left: 10px;
   display: grid;
   grid-template-columns: 4fr  1fr;
   grid-gap: 40px;
@@ -27,15 +27,20 @@ const MainLayout = styled.main`
 
 const MainImage = styled.main`
   margin: 10px;
+  margin-top: 0px;
 `
 
 const MainFooter = styled.main`
   height: 30px;
   background: #524763;
   color: white;
+  
   a {
     text-decoration: underline;
     color: white;
+  }
+  .footer {
+    margin-left: 10px;
   }
 `
 
@@ -81,7 +86,7 @@ const Layout = ({ children }) => (
           <Archive />
         </MainLayout>
         <MainFooter>
-          <footer>
+          <footer class="footer">
             © {new Date().getFullYear()}, Built by
             {` `}
             <a href="https://www.pateogroup.com">Pateo Group</a>

@@ -29,6 +29,12 @@ const ArchiveList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-left: 10px;
+`
+
+const ArchiveTitle = styled.h2`
+  margin-top: 15px;
+  margin-left: 10px;
 `
 
 
@@ -38,7 +44,7 @@ const Archive = () => (
     render={({ allMarkdownRemark }) => (
       <>
         <aside>
-          <h3>Archive</h3>
+          <ArchiveTitle>Archive</ArchiveTitle>
           <ArchiveList>
             {allMarkdownRemark.edges.map(edge => (
               <li key={edge.node.frontmatter.slug}>

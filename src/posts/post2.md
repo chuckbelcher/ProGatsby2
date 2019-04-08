@@ -2,7 +2,7 @@
 slug: "/second-post"
 date: "2018-10-17"
 title: "Our Second Post"
-----
+---
 
 #Yo!
 

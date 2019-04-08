@@ -10,6 +10,7 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 import { StaticQuery, graphql } from "gatsby"
 import Helmet from 'react-helmet';
+import { Spring } from 'react-spring/renderprops';
 import Img from 'gatsby-image'
 
 import Header from "./header"
@@ -44,7 +45,7 @@ const MainFooter = styled.main`
   }
 `
 
-const Layout = ({ children }) => (
+const Layout = ({ children, location }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -78,9 +79,15 @@ const Layout = ({ children }) => (
           <html lang="en" />
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <MainImage>
-          <Img fluid={data.file.childImageSharp.fluid} />
-        </MainImage>
+        <Spring 
+          from={{ height: location.pathname === "/" ? 200 : 100 }} 
+          to={{ height: location.pathname === "/" ? 200 : 100 }}>
+          {styles => (
+            <MainImage style={{ overflow: "hidden", ...styles }}>
+              <Img fluid={data.file.childImageSharp.fluid} />
+            </MainImage>
+          )}
+        </Spring>
         <MainLayout>
           <div>{children}</div>
           <Archive />
